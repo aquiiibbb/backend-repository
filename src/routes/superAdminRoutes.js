@@ -41,7 +41,7 @@ router.use('/data', require('./superAdminDataRoutes'));
 
 
 // Address of the HOTEL app (where owners log in); used in the login e-mail
-const hotelLoginUrl = () => `${String(process.env.HOTEL_APP_URL || 'http://localhost:5173').replace(/\/+$/, '')}/login`;
+const hotelLoginUrl = () => `${String(process.env.HOTEL_APP_URL || 'http://app.ahaalo.com').replace(/\/+$/, '')}/login`;
 
 // Sends the login details straight to the owner's e-mail. Never throws: the panel still shows the details if mail fails.
 async function mailCredentials(tenant, creds, isReset = false) {
