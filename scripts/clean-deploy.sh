@@ -12,7 +12,7 @@ echo "Step 1: Purana Code / Previous Deployment Clean Up"
 echo "--------------------------------------------------------"
 pm2 kill || true
 sudo rm -rf /var/www/ahaalo-frontend /var/www/ahaalo-superadmin /var/www/html/*
-rm -rf ~/Frontend ~/SuperAdmin ~/Ahaalo-software
+rm -rf ~/backend ~/Frontend ~/SuperAdmin ~/Ahaalo-software
 
 echo "--------------------------------------------------------"
 echo "Step 2: Installing System Requirements (Node.js 20, Nginx, PM2, Git)"
@@ -35,23 +35,9 @@ echo "--------------------------------------------------------"
 echo "Step 3: Cloning Fresh Code repositories from GitHub"
 echo "--------------------------------------------------------"
 cd ~
-if [ ! -d "backend/.git" ]; then
-    git clone https://github.com/aquiiibbb/backend-repository.git backend
-else
-    cd backend && git pull origin main && cd ~
-fi
-
-if [ ! -d "Frontend/.git" ]; then
-    git clone https://github.com/aquiiibbb/frontend--repository.git Frontend
-else
-    cd Frontend && git pull origin main && cd ~
-fi
-
-if [ ! -d "SuperAdmin/.git" ]; then
-    git clone https://github.com/aquiiibbb/admin-repository.git SuperAdmin
-else
-    cd SuperAdmin && git pull origin main && cd ~
-fi
+git clone https://github.com/aquiiibbb/backend-repository.git backend
+git clone https://github.com/aquiiibbb/frontend--repository.git Frontend
+git clone https://github.com/aquiiibbb/admin-repository.git SuperAdmin
 
 echo "--------------------------------------------------------"
 echo "Step 4: Setting up Backend (api.ahaalo.com)"
