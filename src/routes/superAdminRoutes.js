@@ -253,6 +253,7 @@ router.post('/tenants', async (req, res, next) => {
       email: String(ownerEmail).toLowerCase(), role: 'System Admin', status: 'Active', rights: { ...ALL_YES_RIGHTS },
     };
     await store.writeKey(tenantId, USERS_KEY, JSON.stringify([adminUser]));
+    await ensureAdminAccount(tenantId, { username: 'admin', password, name: ownerName || name, email: ownerEmail });
     // A hotel with no saved room list would show 50 demo rooms - save an empty list so the new hotel starts completely blank
     await store.writeKey(tenantId, 'hotelpms_room_numbers_v3', '[]');
     const initialHotelInfo = {
