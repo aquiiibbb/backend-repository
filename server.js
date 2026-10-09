@@ -9,7 +9,7 @@ const { startScheduler, platformConfigured, verifyPlatform } = require('./src/se
 const PORT = process.env.PORT || 5000;
 // Connect Database and Start Server
 connectDB().then(async () => {
-  await bootstrapDefaultTenant();
+  try { await bootstrapDefaultTenant(); } catch (e) { console.error('bootstrapDefaultTenant failed:', e.message); }
   try { await migrateAndResync(); } catch (e) { console.error('migrateAndResync failed:', e.message); }
   if (!process.env.ANTHROPIC_API_KEY) console.log('ℹ️');
   startScheduler();
