@@ -43,7 +43,13 @@ echo "--------------------------------------------------------"
 echo "Step 4: Setting up Backend (api.ahaalo.com)"
 echo "--------------------------------------------------------"
 cd ~/backend
+if [ -f ".env.production" ]; then
+    cp .env.production .env
+elif [ -f ".env.example" ]; then
+    cp .env.example .env
+fi
 npm install --production
+pm2 delete ahaalo-backend || true
 pm2 start server.js --name "ahaalo-backend" --env production
 pm2 save
 
